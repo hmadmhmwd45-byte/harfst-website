@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هارفست للتوريدات | Harvest Supplies</title>
+    <!-- استدعاء خط Cairo العربي من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* إعدادات الصفحة الأساسية */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            height: 100%;
+            /* خلفية الموقع */
+            background: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            scroll-behavior: smooth;
+        }
+
+        /* الطبقة الداكنة فوق الخلفية لتوضيح الكلام */
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* حاوية المحتوى */
+        .content {
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        /* تنسيق العنوان الرئيسي */
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 0;
+            color: #4CAF50; /* لون أخضر يعبر عن هارفست */
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+
+        /* تنسيق الكلمة الترحيبية */
+        p.welcome-text {
+            font-size: 1.8rem;
+            margin-top: -10px;
+            margin-bottom: 40px;
+            color: #e0e0e0;
+            letter-spacing: 1px;
+        }
+
+        /* تنسيق الزر المستطيل */
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: inherit;
+            border: 2px solid #4CAF50;
+            border-radius: 8px; /* حواف شبه مستطيلة */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        /* تأثير عند الوقوف بالماوس على الزر */
+        .btn:hover {
+            background-color: transparent;
+            color: #4CAF50;
+            transform: translateY(-3px);
+        }
+
+        /* تنسيق حاوية الجدول */
+        .table-container {
+            display: none; /* مخفي في البداية */
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شفافة للجدول */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow-x: auto; /* لتجنب خروج الجدول عن الشاشة في الموبايل */
+            animation: fadeInDown 0.6s ease-out forwards;
+        }
+
+        /* تنسيق الجدول */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #388E3C;
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        tr:hover td {
+            background-color: #f5f5f5;
+        }
+
+        /* تأثير ظهور الجدول */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* جعل الموقع متوافق مع شاشات الموبايل */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            p.welcome-text { font-size: 1.3rem; }
+            .btn { width: 100%; padding: 15px 20px; }
+            th, td { padding: 10px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay">
+        <div class="content">
+            <!-- النصوص -->
+            <h1>هارفست للتوريدات</h1>
+            <p class="welcome-text">ترحب بكم</p>
+            
+            <!-- الزر -->
+            <button id="showTableBtn" class="btn">أسعار المنتجات</button>
+            
+            <!-- الجدول (مخفي برمجياً حتى يتم الضغط على الزر) -->
+            <div id="tableContainer" class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>م</th> <!-- خانة الترقيم -->
+                            <th>اسم الصنف</th>
+                            <th>العدد</th>
+                            <th>الفرز</th>
+                            <th>الكود</th>
+                            <th>السعر</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- يمكنك إضافة المنتجات هنا بنسخ هذا السطر وتكراره -->
+                        <tr>
+                            <td>1</td>
+                            <td>مواسير PVC</td>
+                            <td>150</td>
+                            <td>فرز أول</td>
+                            <td>HRV-001</td>
+                            <td>450 ج.م</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>كابلات كهربائية</td>
+                            <td>300</td>
+                            <td>فرز أول</td>
+                            <td>HRV-002</td>
+                            <td>1200 ج.م</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>أسمنت بورتلاندي</td>
+                            <td>50</td>
+                            <td>فرز ثاني</td>
+                            <td>HRV-003</td>
+                            <td>200 ج.م</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- كود الجافاسكربت لتشغيل زر إظهار وإخفاء الجدول -->
+    <script>
+        document.getElementById('showTableBtn').addEventListener('click', function() {
+            var tableContainer = document.getElementById('tableContainer');
+            
+            // إذا كان الجدول مخفي، أظهره، والعكس صحيح
+            if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+                tableContainer.style.display = 'block';
+                // تغيير نص الزر
+                this.innerText = 'إخفاء أسعار المنتجات';
+                
+                // التمرير السلس للأسفل لضمان رؤية الجدول بالكامل
+                setTimeout(() => {
+                    tableContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                tableContainer.style.display = 'none';
+                this.innerText = 'أسعار المنتجات';
+            }
+        });
+    </script>
+
+</body>
+</html>
